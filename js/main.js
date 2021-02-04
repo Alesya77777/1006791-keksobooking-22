@@ -1,33 +1,33 @@
-const RangeFrom = 1.2;
-const RangeTo = 5.6;
-const NumberSimbolsAfterComma= 9;
+const rangeFrom = 1.2;
+const rangeTo = 5.6;
+let precision;
 
 
-const getRandomInteger = (RangeFrom, RangeTo) => {
-  if (RangeFrom >=0 && RangeTo >=0) {
-    if (RangeFrom < RangeTo) {
-      RangeFrom = Math.ceil(RangeFrom);
-      RangeTo = Math.floor(RangeTo);
-      return Math.floor(Math.random() * (RangeTo - RangeFrom )) + RangeFrom;
+const getRandomInteger = (rangeFrom, rangeTo) => {
+  if (rangeFrom >=0 && rangeTo >=0) {
+    if (rangeFrom < rangeTo) {
+      rangeFrom = Math.ceil(rangeFrom);
+      rangeTo = Math.floor(rangeTo);
+      return Math.floor(Math.random() * (rangeTo - rangeFrom )) + rangeFrom;
     } else {
-      return ('Задан не верный диапазон. Значение от не может быть больше значения до. Задайте правильный диапазон.');
+      throw new Error('Задан не верный диапазон. Значение от не может быть больше значения до. Задайте правильный диапазон.');
     }
   } else {
-    return ('Задан отрицательный диапазон');
+    throw new Error('Задан отрицательный диапазон');
   }
 }
-getRandomInteger (RangeFrom, RangeTo);
+getRandomInteger (rangeFrom, rangeTo);
 
 
-const getRandomFloatNumber = (RangeFrom, RangeTo, NumberSimbolsAfterComma) => {
-  if (RangeFrom >=0 && RangeTo >=0) {
-    if (RangeFrom < RangeTo) {
-      return +((+Math.random().toFixed(NumberSimbolsAfterComma) * (RangeTo - RangeFrom ) + RangeFrom).toFixed(NumberSimbolsAfterComma));
+const getRandomFloatNumber = (rangeFrom, rangeTo, precision = 9) => {
+  if (rangeFrom >=0 && rangeTo >=0) {
+    if (rangeFrom < rangeTo) {
+      return +((Math.random() * (rangeTo - rangeFrom ) + rangeFrom).toFixed(precision));
     } else {
-      return ('Задан не верный диапазон. Значение от не может быть больше значения до. Задайте правильный диапазон.');
+      throw new Error('Задан не верный диапазон. Значение от не может быть больше значения до. Задайте правильный диапазон.');
     }
   } else {
-    return ('Задан отрицательный диапазон');
+    throw new Error('Задан отрицательный диапазон');
   }
 }
-getRandomFloatNumber (RangeFrom, RangeTo, NumberSimbolsAfterComma);
+getRandomFloatNumber (rangeFrom, rangeTo, precision);
