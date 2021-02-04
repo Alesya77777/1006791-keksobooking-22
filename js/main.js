@@ -1,8 +1,3 @@
-const rangeFrom = 1.2;
-const rangeTo = 5.6;
-let precision;
-
-
 const getRandomInteger = (rangeFrom, rangeTo) => {
   if (rangeFrom >=0 && rangeTo >=0) {
     if (rangeFrom < rangeTo) {
@@ -16,13 +11,13 @@ const getRandomInteger = (rangeFrom, rangeTo) => {
     throw new Error('Задан отрицательный диапазон');
   }
 }
-getRandomInteger (rangeFrom, rangeTo);
+getRandomInteger (2, 6);
 
 
 const getRandomFloatNumber = (rangeFrom, rangeTo, precision = 9) => {
   if (rangeFrom >=0 && rangeTo >=0) {
     if (rangeFrom < rangeTo) {
-      return +((Math.random() * (rangeTo - rangeFrom ) + rangeFrom).toFixed(precision));
+      return parseFloat((Math.random() * (rangeTo - rangeFrom ) + rangeFrom).toFixed(precision));
     } else {
       throw new Error('Задан не верный диапазон. Значение от не может быть больше значения до. Задайте правильный диапазон.');
     }
@@ -30,4 +25,5 @@ const getRandomFloatNumber = (rangeFrom, rangeTo, precision = 9) => {
     throw new Error('Задан отрицательный диапазон');
   }
 }
-getRandomFloatNumber (rangeFrom, rangeTo, precision);
+getRandomFloatNumber (1.2, 5.6);
+
