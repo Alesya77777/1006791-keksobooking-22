@@ -11,7 +11,8 @@ const getRandomInteger = (rangeFrom, rangeTo) => {
     throw new Error('Задан отрицательный диапазон');
   }
 }
-//getRandomInteger (2, 6);
+
+getRandomInteger (2, 6);
 
 
 const getRandomFloatNumber = (rangeFrom, rangeTo, precision = 9) => {
@@ -25,37 +26,35 @@ const getRandomFloatNumber = (rangeFrom, rangeTo, precision = 9) => {
     throw new Error('Задан отрицательный диапазон');
   }
 }
-//getRandomFloatNumber (1.2, 5.6);
+
+getRandomFloatNumber (1.2, 5.6);
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow'];
 const TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel2.jpg',
-  'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
+const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 const SIMILAR_OBJECT_COUNT = 10;
+
 
 
 const getRandomArrayElement = (elements) => {
   return elements[getRandomInteger(0, elements.length - 1)];
 }
 
+const getRandomArrayList = (list) => {
+  const leangthList = getRandomInteger(0, list.length - 1);
+  const listIndexArray = [];
+  for (let i=0; i<=leangthList; i++) {
+    listIndexArray[i] = list[i];
+  }
+  return listIndexArray;
+};
 
-const createObject = () => {
+
+const createAd = () => {
   const randomAvatar = '0' + getRandomInteger(1, 8);
   const randomX = getRandomFloatNumber(35.65000, 35.70000, 5);
   const randomY = getRandomFloatNumber(139.70000, 139.80000, 5);
-  const randomFeatures = [];
-  const randomPhotos = [];
-
-  for (let i=0; i<=getRandomInteger(0, FEATURES.length); i++) {
-    randomFeatures[i] = FEATURES[i];
-  }
-
-  for (let i=0; i<=getRandomInteger(0, PHOTOS.length); i++) {
-    randomPhotos[i] = PHOTOS[i];
-  }
-
   return {
     author: {
       avatar: 'img/avatars/user' +`${randomAvatar}` +'.png',
@@ -69,9 +68,9 @@ const createObject = () => {
       guests: getRandomInteger(2, 100),
       checkin: getRandomArrayElement(TIMES),
       checkout: getRandomArrayElement(TIMES),
-      features: randomFeatures,
+      features: getRandomArrayList(FEATURES),
       description: 'Дом окружен просторным садом, где мы выращиваем фрукты, овощи и цветы.',
-      photos: randomPhotos,
+      photos: getRandomArrayList(PHOTOS),
     },
     location: {
       x: randomX,
@@ -80,4 +79,13 @@ const createObject = () => {
   };
 };
 
-new Array(SIMILAR_OBJECT_COUNT).fill(null).map(() => createObject());
+createAd();
+
+
+const createAds = (count) => {
+  return new Array(count).fill(null).map(() => createAd());
+};
+
+createAds(SIMILAR_OBJECT_COUNT);
+
+
