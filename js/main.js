@@ -80,7 +80,4 @@ const createObject = () => {
   };
 };
 
-const similarObjects = new Array(SIMILAR_OBJECT_COUNT).fill(null).map(() => createObject());
-
-
-
+new Array(SIMILAR_OBJECT_COUNT).fill(null).map(() => createObject());
