@@ -79,8 +79,6 @@ const createAd = () => {
   };
 };
 
-createAd();
-
 
 const createAds = (count) => {
   return new Array(count).fill(null).map(() => createAd());
