@@ -29,4 +29,19 @@ const getRandomFloatNumber = (rangeFrom, rangeTo, precision = 9) => {
 
 getRandomFloatNumber (1.2, 5.6);
 
-export {getRandomInteger, getRandomFloatNumber};
+
+const getRandomArrayElement = (elements) => {
+  return elements[getRandomInteger(0, elements.length - 1)];
+}
+
+
+const getRandomArrayList = (list) => {
+  const leangthList = getRandomInteger(0, list.length - 1);
+  const listIndexArray = [];
+  for (let i=0; i<=leangthList; i++) {
+    listIndexArray[i] = list[i];
+  }
+  return listIndexArray;
+};
+
+export {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList};

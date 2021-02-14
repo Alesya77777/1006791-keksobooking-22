@@ -1,25 +1,9 @@
-import {getRandomInteger, getRandomFloatNumber} from './util';
+import {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList} from './util';
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow'];
 const TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-const SIMILAR_OBJECT_COUNT = 10;
-
-
-
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomInteger(0, elements.length - 1)];
-}
-
-const getRandomArrayList = (list) => {
-  const leangthList = getRandomInteger(0, list.length - 1);
-  const listIndexArray = [];
-  for (let i=0; i<=leangthList; i++) {
-    listIndexArray[i] = list[i];
-  }
-  return listIndexArray;
-};
 
 
 const createAd = () => {
@@ -55,7 +39,7 @@ const createAds = (count) => {
   return new Array(count).fill(null).map(() => createAd());
 };
 
-createAds(SIMILAR_OBJECT_COUNT);
+export {createAds};
 
 
 
