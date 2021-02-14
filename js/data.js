@@ -1,4 +1,6 @@
+
 import {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList} from './util';
+
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow'];
 const TIMES = ['12:00', '13:00', '14:00'];
@@ -39,7 +41,9 @@ const createAds = (count) => {
   return new Array(count).fill(null).map(() => createAd());
 };
 
+
 export {createAds};
+
 
 
 

@@ -45,3 +45,4 @@ const getRandomArrayList = (list) => {
 };
 
 export {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList};
+
