@@ -1,7 +1,12 @@
 
 import {createAds} from './data.js';
-import './similar-ads.js';
+import {createCustomPopup} from './similar-ads.js';
 const SIMILAR_OBJECT_COUNT = 10;
 
-createAds(SIMILAR_OBJECT_COUNT);
+
+
+const similarAds = createAds(SIMILAR_OBJECT_COUNT);
+
+createCustomPopup(similarAds[0]);
+
 

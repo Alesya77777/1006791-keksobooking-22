@@ -1,16 +1,7 @@
-import {createAds} from './data.js';
-
-const similarListAd = document.querySelector('#map-canvas');
-const similarAdTemplate = document.querySelector('#card').content.querySelector('.popup');
-
-
-const similarAds = createAds();
-const similarListFragment = document.createDocumentFragment();
-
-
-similarAds.forEach((ad) => {
-
-
+const createCustomPopup = (ad) => {
+  const similarListAd = document.querySelector('#map-canvas');
+  const similarAdTemplate = document.querySelector('#card').content.querySelector('.popup');
+  const similarListFragment = document.createDocumentFragment();
   const adElement = similarAdTemplate.cloneNode(true);
 
   const houseType =  {
@@ -19,7 +10,6 @@ similarAds.forEach((ad) => {
     house:'Дом',
     palace:'Дворец',
   };
-
 
   adElement.querySelector('.popup__avatar').src = (ad.author.avatar);
   adElement.querySelector('.popup__title').textContent = ad.offer.title;
@@ -58,7 +48,9 @@ similarAds.forEach((ad) => {
 
   similarListFragment.appendChild(adElement);
 
-});
 
-similarListAd.appendChild(similarListFragment);
+  similarListAd.appendChild(similarListFragment);
+  return similarListAd;
+};
 
+export {createCustomPopup};
