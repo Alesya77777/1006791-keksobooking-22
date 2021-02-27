@@ -1,5 +1,5 @@
 
-import {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList} from './util';
+import {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList} from './util.js';
 
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow'];
