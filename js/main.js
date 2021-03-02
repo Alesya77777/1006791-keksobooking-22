@@ -1,6 +1,8 @@
 
 import {createAds} from './data.js';
 import {createCustomPopup} from './similar-ads.js';
+import './interaction-form.js';
+
 const SIMILAR_OBJECT_COUNT = 10;
 
 
