@@ -1,6 +1,6 @@
 /* global L:readonly */
 import {includeAllForm} from './interaction-form.js';
-import {createCustomPopup} from './similar-ads.js';
+
 
 const inputAddress = document.querySelector('#address');
 const latutideMarker = 35.6895;
@@ -55,7 +55,7 @@ const createMarker = (latutide, longitude, pinIcon, popup) => {
 };
 
 const mainMarker = createMarker(latutideMarker, longitudeMarker, mainPinIcon);
-//const usualMarker = createMarker(usualPinIcon);
+
 
 
 mainMarker.on('moveend', (evt) => {
