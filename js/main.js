@@ -15,8 +15,5 @@ const similarAds = createAds(SIMILAR_OBJECT_COUNT);
 disableAllForm();
 createMap(similarAds);
 
-//createCustomPopup(similarAds[0]);
 
-
-//console.log(createCustomPopup(similarAds[0]));
 

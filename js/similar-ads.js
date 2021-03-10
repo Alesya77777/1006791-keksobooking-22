@@ -49,9 +49,6 @@ const createCustomPopup = (ad) => {
 
   similarListFragment.appendChild(adElement);
 
-
-  //similarListAd.appendChild(similarListFragment);
-  //return similarListFragment.appendChild(adElement);
   return similarListFragment;
 };
 
