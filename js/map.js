@@ -6,7 +6,7 @@ const inputAddress = document.querySelector('#address');
 
 const latutideCenterMap = 35.6895;
 const longitudeCenterMap = 139.692;
-const zoomMap = 10;
+const zoomMap = 12;
 const latutideMarker = 35.6895;
 const longitudeMarker = 139.692;
 
@@ -73,6 +73,7 @@ const createMap = (ads) => {
       },
     );
     console.log(createCustomPopup(point));
+
     usualMarker.addTo(map).bindPopup(
       () => createCustomPopup(point),
       {

@@ -2,7 +2,7 @@
 import {createAds} from './data.js';
 import  './similar-ads.js';
 import {disableAllForm} from './interaction-form.js';
-import {createMap} from './map2.js';
+import {createMap} from './map.js';
 
 const SIMILAR_OBJECT_COUNT = 10;
 
