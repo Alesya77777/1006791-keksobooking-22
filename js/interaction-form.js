@@ -1,3 +1,4 @@
+
 const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
 const allFieldsets = document.querySelectorAll('fieldset');
@@ -74,5 +75,7 @@ selectTimeOut.addEventListener('change',changeTimeOut);
 
 
 
+
 export{disableAllForm, includeAllForm}
+
 
