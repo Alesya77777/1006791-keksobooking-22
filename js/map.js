@@ -72,7 +72,6 @@ const createMap = (ads) => {
         icon: usualPinIcon,
       },
     );
-    console.log(createCustomPopup(point));
 
     usualMarker.addTo(map).bindPopup(
       () => createCustomPopup(point),
