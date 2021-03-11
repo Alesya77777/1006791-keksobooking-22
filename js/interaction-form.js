@@ -8,8 +8,8 @@ const disableForm = (form) => {
   form.classList.add('ad-form--disabled');
 };
 
-const disableElements = (array) => {
-  array.forEach(element => element.setAttribute('disabled', 'disabled'));
+const disableElements = (list) => {
+  list.forEach(element => element.setAttribute('disabled', 'disabled'));
 };
 
 const disableAllForm = () => {
@@ -23,8 +23,8 @@ const enableForm = (form) => {
   form.classList.remove('ad-form--disabled');
 }
 
-const enableElements = (array) => {
-  array.forEach(element => element.removeAttribute('disabled', 'disabled'));
+const enableElements = (list) => {
+  list.forEach(element => element.removeAttribute('disabled', 'disabled'));
 };
 
 const enableAllForm = () => {
