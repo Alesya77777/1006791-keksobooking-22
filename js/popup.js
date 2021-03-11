@@ -1,6 +1,6 @@
+
 const createCustomPopup = (ad) => {
-  const similarListAd = document.querySelector('#map-canvas');
-  const similarAdTemplate = document.querySelector('#card').content.querySelector('.popup');
+  const similarAdTemplate = document.querySelector('#card').content;
   const similarListFragment = document.createDocumentFragment();
   const adElement = similarAdTemplate.cloneNode(true);
 
@@ -48,9 +48,7 @@ const createCustomPopup = (ad) => {
 
   similarListFragment.appendChild(adElement);
 
-
-  similarListAd.appendChild(similarListFragment);
-  return similarListAd;
+  return similarListFragment;
 };
 
 export {createCustomPopup};

@@ -1,3 +1,40 @@
+
+const adForm = document.querySelector('.ad-form');
+const mapForm = document.querySelector('.map__filters');
+const allFieldsets = document.querySelectorAll('fieldset');
+const allSelectes = document.querySelectorAll('select');
+
+const disableForm = (form) => {
+  form.classList.add('ad-form--disabled');
+};
+
+const disableElements = (list) => {
+  list.forEach(element => element.setAttribute('disabled', 'disabled'));
+};
+
+const disableAllForm = () => {
+  disableForm(adForm);
+  disableForm(mapForm);
+  disableElements(allFieldsets);
+  disableElements(allSelectes);
+};
+
+const enableForm = (form) => {
+  form.classList.remove('ad-form--disabled');
+}
+
+const enableElements = (list) => {
+  list.forEach(element => element.removeAttribute('disabled', 'disabled'));
+};
+
+const enableAllForm = () => {
+  enableForm(adForm);
+  enableForm(mapForm);
+  enableElements(allFieldsets);
+  enableElements(allSelectes);
+};
+
+
 const selectTypeHouse = document.querySelector('#type');
 const priceLodging = document.querySelector('#price');
 const housePrice =  {
@@ -32,5 +69,5 @@ selectTimeOut.addEventListener('change',changeTimeOut);
 
 
 
-
+export{disableAllForm, enableAllForm}
 

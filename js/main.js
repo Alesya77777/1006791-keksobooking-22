@@ -1,14 +1,17 @@
 
 import {createAds} from './data.js';
-import {createCustomPopup} from './similar-ads.js';
-import './interaction-form.js';
+import {disableAllForm} from './interaction-form.js';
+import {createMap} from './map.js';
+
 
 const SIMILAR_OBJECT_COUNT = 10;
 
 
 
-const similarAds = createAds(SIMILAR_OBJECT_COUNT);
 
-createCustomPopup(similarAds[0]);
+const similarAds = createAds(SIMILAR_OBJECT_COUNT);
+disableAllForm();
+createMap(similarAds);
+
 
 
