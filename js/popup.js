@@ -1,6 +1,5 @@
 
 const createCustomPopup = (ad) => {
-  //const similarListAd = document.querySelector('#map-canvas');
   const similarAdTemplate = document.querySelector('#card').content;
   const similarListFragment = document.createDocumentFragment();
   const adElement = similarAdTemplate.cloneNode(true);

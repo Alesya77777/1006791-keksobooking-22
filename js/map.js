@@ -1,6 +1,6 @@
 /* global L:readonly */
-import {includeAllForm} from './interaction-form.js';
-import {createCustomPopup} from './similar-ads.js';
+import {enableAllForm} from './interaction-form.js';
+import {createCustomPopup} from './popup.js';
 
 const inputAddress = document.querySelector('#address');
 
@@ -13,7 +13,7 @@ const longitudeMarker = 139.692;
 const createMap = (ads) => {
   const map = L.map('map-canvas');
   map.on('load', () => {
-    includeAllForm();
+    enableAllForm();
     inputAddress.value = (`${latutideMarker}, ${longitudeMarker}`);
   }).setView({
     lat: latutideCenterMap,
@@ -49,7 +49,8 @@ const createMap = (ads) => {
   const floatingPoint = 5;
   mainMarker.on('moveend', (evt) => {
     inputAddress.setAttribute('readonly', 'readonly');
-    inputAddress.value = `${evt.target.getLatLng().lat.toFixed(floatingPoint)}, ${evt.target.getLatLng().lng.toFixed(floatingPoint)}`;
+    const coordinatesAddress = evt.target.getLatLng();
+    inputAddress.value = `${coordinatesAddress.lat.toFixed(floatingPoint)}, ${coordinatesAddress.lng.toFixed(floatingPoint)}`;
   });
 
   const points = ads;

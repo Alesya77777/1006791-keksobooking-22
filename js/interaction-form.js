@@ -8,36 +8,30 @@ const disableForm = (form) => {
   form.classList.add('ad-form--disabled');
 };
 
-const disableBlocks = (array) => {
-  for (let i=0; i<=array.length-1; i++) {
-    const element = array[i];
-    element.setAttribute('disabled', 'disabled');
-  }
+const disableElements = (array) => {
+  array.forEach(element => element.setAttribute('disabled', 'disabled'));
 };
 
 const disableAllForm = () => {
   disableForm(adForm);
   disableForm(mapForm);
-  disableBlocks(allFieldsets);
-  disableBlocks(allSelectes);
+  disableElements(allFieldsets);
+  disableElements(allSelectes);
 };
 
-const includeForm = (form) => {
+const enableForm = (form) => {
   form.classList.remove('ad-form--disabled');
 }
 
-const includeBlocks = (array) => {
-  for (let i=0; i<=array.length-1; i++) {
-    const element = array[i];
-    element.removeAttribute('disabled', 'disabled');
-  }
+const enableElements = (array) => {
+  array.forEach(element => element.removeAttribute('disabled', 'disabled'));
 };
 
-const includeAllForm = () => {
-  includeForm(adForm);
-  includeForm(mapForm);
-  includeBlocks(allFieldsets);
-  includeBlocks(allSelectes);
+const enableAllForm = () => {
+  enableForm(adForm);
+  enableForm(mapForm);
+  enableElements(allFieldsets);
+  enableElements(allSelectes);
 };
 
 
@@ -75,7 +69,5 @@ selectTimeOut.addEventListener('change',changeTimeOut);
 
 
 
-
-export{disableAllForm, includeAllForm}
-
+export{disableAllForm, enableAllForm}
 
