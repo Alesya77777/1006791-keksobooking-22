@@ -71,38 +71,54 @@ selectTimeOut.addEventListener('change',changeTimeOut);
 const selectRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 
+const getFirstEnableElementList = () => {
+  Array.prototype.find.call(document.querySelector('#capacity').options, child => {
+    return child.disabled === false
+  }).setAttribute('selected', 'selected');
+};
+
 const changeGuest = () => {
-  selectCapacity.querySelector('[value="1"]').setAttribute('selected', 'selected');
   selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
   selectCapacity.querySelector('[value="2"]').setAttribute('disabled', 'disabled');
   selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
+  getFirstEnableElementList();
+
+};
+
+const removeSelectElement = (list) => {
+  list.forEach(element => element.removeAttribute('selected', 'selected'));
 };
 
 document.addEventListener('DOMContentLoaded', changeGuest);
 
 const changeCapacity = () => {
   enableElements(document.querySelector('#capacity').querySelectorAll('option'));
+  removeSelectElement(document.querySelector('#capacity').querySelectorAll('option'));
   if (selectRoom.value == 1) {
     selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
     selectCapacity.querySelector('[value="2"]').setAttribute('disabled', 'disabled');
     selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
+    getFirstEnableElementList()
+
+
   }
   else if (selectRoom.value == 2) {
     selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
     selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
+    getFirstEnableElementList();
+
   }
   else if (selectRoom.value == 3) {
-
     selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
+    getFirstEnableElementList();
   }
   else if (selectRoom.value == 100) {
     selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
     selectCapacity.querySelector('[value="2"]').setAttribute('disabled', 'disabled');
     selectCapacity.querySelector('[value="1"]').setAttribute('disabled', 'disabled');
+    getFirstEnableElementList();
   }
 };
 selectRoom.addEventListener('change',changeCapacity);
-
-
 export{disableAllForm, enableAllForm}
 
