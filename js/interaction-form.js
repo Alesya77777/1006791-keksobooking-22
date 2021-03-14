@@ -9,7 +9,7 @@ const disableForm = (form) => {
 };
 
 const disableElements = (list) => {
-  list.forEach(element => element.setAttribute('disabled', 'disabled'));
+  list.forEach(element => element.disabled = true);
 };
 
 const disableAllForm = () => {
@@ -24,7 +24,7 @@ const enableForm = (form) => {
 }
 
 const enableElements = (list) => {
-  list.forEach(element => element.removeAttribute('disabled', 'disabled'));
+  list.forEach(element => element.disabled = false);
 };
 
 const enableAllForm = () => {
@@ -71,53 +71,52 @@ selectTimeOut.addEventListener('change',changeTimeOut);
 const selectRoom = document.querySelector('#room_number');
 const selectCapacity = document.querySelector('#capacity');
 
-const getFirstEnableElementList = () => {
-  Array.prototype.find.call(document.querySelector('#capacity').options, child => {
-    return child.disabled === false
-  }).setAttribute('selected', 'selected');
+const selectFirstEnableElementList = () => {
+  const enableOption = Array.from(selectCapacity.options).find(it => !it.disabled );
+  if (enableOption) {
+    enableOption.selected = true;
+  }
 };
 
-const changeGuest = () => {
-  selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
-  selectCapacity.querySelector('[value="2"]').setAttribute('disabled', 'disabled');
-  selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
-  getFirstEnableElementList();
+const selectCapacityDefault = () => {
+  selectCapacity.options[3].disabled = true;
+  selectCapacity.options[1].disabled = true;
+  selectCapacity.options[0].disabled = true;
+}
 
+const  selectEnabelCapacity= () => {
+  selectCapacityDefault();
+  selectFirstEnableElementList();
 };
+
 
 const removeSelectElement = (list) => {
-  list.forEach(element => element.removeAttribute('selected', 'selected'));
+  list.forEach(element => element.selected = false);
 };
 
-document.addEventListener('DOMContentLoaded', changeGuest);
+document.addEventListener('DOMContentLoaded', selectEnabelCapacity);
 
 const changeCapacity = () => {
   enableElements(document.querySelector('#capacity').querySelectorAll('option'));
   removeSelectElement(document.querySelector('#capacity').querySelectorAll('option'));
-  if (selectRoom.value == 1) {
-    selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
-    selectCapacity.querySelector('[value="2"]').setAttribute('disabled', 'disabled');
-    selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
-    getFirstEnableElementList()
-
-
+  switch (selectRoom.value) {
+    case '1':
+      selectCapacityDefault();
+      break;
+    case '2':
+      selectCapacityDefault();
+      selectCapacity.options[1].disabled = false;
+      break;
+    case '3':
+      selectCapacity.options[3].disabled = true;
+      break;
+    case '100':
+      selectCapacityDefault();
+      selectCapacity.options[2].disabled = true;
+      selectCapacity.options[3].disabled = false;
+      break;
   }
-  else if (selectRoom.value == 2) {
-    selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
-    selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
-    getFirstEnableElementList();
-
-  }
-  else if (selectRoom.value == 3) {
-    selectCapacity.querySelector('[value="0"]').setAttribute('disabled', 'disabled');
-    getFirstEnableElementList();
-  }
-  else if (selectRoom.value == 100) {
-    selectCapacity.querySelector('[value="3"]').setAttribute('disabled', 'disabled');
-    selectCapacity.querySelector('[value="2"]').setAttribute('disabled', 'disabled');
-    selectCapacity.querySelector('[value="1"]').setAttribute('disabled', 'disabled');
-    getFirstEnableElementList();
-  }
+  selectFirstEnableElementList();
 };
 selectRoom.addEventListener('change',changeCapacity);
 export{disableAllForm, enableAllForm}
