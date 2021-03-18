@@ -1,5 +1,5 @@
 /* global L:readonly */
-import {enableAllForm} from './interaction-form.js';
+import {enableAllForm, enableFilter} from './interaction-form.js';
 import {createCustomPopup} from './popup.js';
 
 const inputAddress = document.querySelector('#address');
@@ -7,14 +7,20 @@ const inputAddress = document.querySelector('#address');
 const latutideCenterMap = 35.6895;
 const longitudeCenterMap = 139.692;
 const zoomMap = 12;
-const latutideMarker = 35.6895;
-const longitudeMarker = 139.692;
+const LATUTIDE_MARKER= 35.6895;
+const LONGITUDE_MARKER= 139.692;
+const map = L.map('map-canvas');
 
-const createMap = (ads) => {
-  const map = L.map('map-canvas');
+
+const writeAddress = () => {
+  document.querySelector('#address').value = (`${LATUTIDE_MARKER}, ${LONGITUDE_MARKER}`);
+};
+
+const createMap = () => {
   map.on('load', () => {
     enableAllForm();
-    inputAddress.value = (`${latutideMarker}, ${longitudeMarker}`);
+    //writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
+    inputAddress.value = (`${LATUTIDE_MARKER}, ${LONGITUDE_MARKER}`);
   }).setView({
     lat: latutideCenterMap,
     lng: longitudeCenterMap,
@@ -28,6 +34,7 @@ const createMap = (ads) => {
   ).addTo(map);
 
 
+
   const mainPinIcon = L.icon({
     iconUrl: '../img/main-pin.svg',
     iconSize: [52, 52],
@@ -36,8 +43,8 @@ const createMap = (ads) => {
 
   const mainMarker = L.marker(
     {
-      lat: latutideMarker,
-      lng: longitudeMarker,
+      lat: LATUTIDE_MARKER,
+      lng: LONGITUDE_MARKER,
     },
     {
       draggable: true,
@@ -52,12 +59,15 @@ const createMap = (ads) => {
     const coordinatesAddress = evt.target.getLatLng();
     inputAddress.value = `${coordinatesAddress.lat.toFixed(floatingPoint)}, ${coordinatesAddress.lng.toFixed(floatingPoint)}`;
   });
+}
 
+const createMarker = (ads) => {
+  enableFilter();
   const points = ads;
   points.forEach((point) => {
     const { location } = point;
-    const lat = location.x;
-    const long = location.y;
+    const lat = location.lat;
+    const long = location.lng;
     const usualPinIcon = L.icon({
       iconUrl: '../img/pin.svg',
       iconSize: [52, 52],
@@ -84,4 +94,4 @@ const createMap = (ads) => {
 
 };
 
-export {createMap}
+export {createMap, createMarker,writeAddress}

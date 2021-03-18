@@ -1,8 +1,13 @@
+import {showAlert} from './util.js';
+import {sendData} from './api.js';
+import {writeAddress} from './map.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
-const allFieldsets = document.querySelectorAll('fieldset');
-const allSelectes = document.querySelectorAll('select');
+const allFieldsetsForm = document.querySelector('.ad-form').querySelectorAll('fieldset');
+const allSelectes = document.querySelectorAll('.map__filter');
+const allFieldsetsFilter = document.querySelector('.map__filters').querySelectorAll('fieldset');
+const MOLD_CLEANING_DELAY_TIME =500;
 
 const disableForm = (form) => {
   form.classList.add('ad-form--disabled');
@@ -15,8 +20,9 @@ const disableElements = (list) => {
 const disableAllForm = () => {
   disableForm(adForm);
   disableForm(mapForm);
-  disableElements(allFieldsets);
+  disableElements(allFieldsetsForm);
   disableElements(allSelectes);
+  disableElements(allFieldsetsFilter);
 };
 
 const enableForm = (form) => {
@@ -30,8 +36,12 @@ const enableElements = (list) => {
 const enableAllForm = () => {
   enableForm(adForm);
   enableForm(mapForm);
-  enableElements(allFieldsets);
+  enableElements(allFieldsetsForm);
+};
+
+const enableFilter = () => {
   enableElements(allSelectes);
+  enableElements(allFieldsetsFilter);
 };
 
 
@@ -119,5 +129,42 @@ const changeCapacity = () => {
   selectFirstEnableElementList();
 };
 selectRoom.addEventListener('change',changeCapacity);
-export{disableAllForm, enableAllForm}
+
+
+
+const cleanPage = () => {
+  setTimeout(() => {
+    mapForm.reset();
+    adForm.reset();
+    selectEnabelCapacity();
+    writeAddress();
+  }, MOLD_CLEANING_DELAY_TIME )
+}
+
+const showSuccessMessage = () => {
+  const successMessageTemplate = document.querySelector('#success');
+  const adElement = successMessageTemplate.cloneNode(true);
+  successMessageTemplate.appendChild(adElement);
+
+  return successMessageTemplate.appendChild(adElement);
+};
+
+const setUserFormSubmit = (onSuccess, onMessage) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      new FormData(evt.target),
+      () => onMessage(),
+    );
+
+  });
+}
+
+
+
+
+export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage}
 
