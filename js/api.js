@@ -1,3 +1,5 @@
+import {onClickErrorButton} from './interaction-form.js';
+
 const GET_DATA_URL = 'https://22.javascript.pages.academy/keksobooking/data';
 const SEND_DATA_URL = 'https://22.javascript.pages.academy/keksobooking';
 const getData = (onSuccess, onFail) => {
@@ -10,7 +12,7 @@ const getData = (onSuccess, onFail) => {
       onFail('Не удалось загрузить данные с сервера')})
 };
 
-const sendData = (onSuccess, onFail, body, onMessage) => {
+const sendData = (onSuccess, onFail, body, onSuccessMessage, onErrorMessage) => {
   fetch(
     SEND_DATA_URL,
     {
@@ -22,14 +24,15 @@ const sendData = (onSuccess, onFail, body, onMessage) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
-        onMessage();
-
+        onSuccessMessage();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onErrorMessage();
+        onClickErrorButton();
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onErrorMessage();
+      onClickErrorButton();
     });
 };
 

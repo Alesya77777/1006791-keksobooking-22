@@ -19,8 +19,7 @@ const writeAddress = () => {
 const createMap = () => {
   map.on('load', () => {
     enableAllForm();
-    //writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
-    inputAddress.value = (`${LATUTIDE_MARKER}, ${LONGITUDE_MARKER}`);
+    writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
   }).setView({
     lat: latutideCenterMap,
     lng: longitudeCenterMap,
@@ -53,12 +52,14 @@ const createMap = () => {
   );
 
   mainMarker.addTo(map);
+
   const floatingPoint = 5;
   mainMarker.on('moveend', (evt) => {
     inputAddress.setAttribute('readonly', 'readonly');
     const coordinatesAddress = evt.target.getLatLng();
     inputAddress.value = `${coordinatesAddress.lat.toFixed(floatingPoint)}, ${coordinatesAddress.lng.toFixed(floatingPoint)}`;
   });
+
 }
 
 const createMarker = (ads) => {

@@ -1,13 +1,15 @@
 import {showAlert} from './util.js';
 import {sendData} from './api.js';
 import {writeAddress} from './map.js';
+import {isEscEvent} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
 const allFieldsetsForm = document.querySelector('.ad-form').querySelectorAll('fieldset');
 const allSelectes = document.querySelectorAll('.map__filter');
 const allFieldsetsFilter = document.querySelector('.map__filters').querySelectorAll('fieldset');
-const MOLD_CLEANING_DELAY_TIME =500;
+const MOLD_CLEANING_DELAY_TIME =0;
+
 
 const disableForm = (form) => {
   form.classList.add('ad-form--disabled');
@@ -141,15 +143,23 @@ const cleanPage = () => {
   }, MOLD_CLEANING_DELAY_TIME )
 }
 
+const successMessageContainer = document.createElement('div');
 const showSuccessMessage = () => {
-  const successMessageTemplate = document.querySelector('#success');
-  const adElement = successMessageTemplate.cloneNode(true);
-  successMessageTemplate.appendChild(adElement);
-
-  return successMessageTemplate.appendChild(adElement);
+  const successMessageTemplate = document.querySelector('#success').content;
+  const successMessageElement = successMessageTemplate.cloneNode(true);
+  successMessageContainer.append(successMessageElement);
+  document.querySelector('.map').appendChild(successMessageContainer)
 };
 
-const setUserFormSubmit = (onSuccess, onMessage) => {
+const errorMessageContainer = document.createElement('div');
+const showErrorMessage = () => {
+  const errorMessageTemplate = document.querySelector('#error').content;
+  const errorMessageElement = errorMessageTemplate.cloneNode(true);
+  errorMessageContainer.append(errorMessageElement);
+  document.querySelector('.map').appendChild(errorMessageContainer)
+};
+
+const setUserFormSubmit = (onSuccess, onSuccessMessage, onErrorMessage) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
@@ -157,14 +167,51 @@ const setUserFormSubmit = (onSuccess, onMessage) => {
       () => onSuccess(),
       () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
       new FormData(evt.target),
-      () => onMessage(),
+      () => onSuccessMessage(),
+      () => onErrorMessage(),
     );
-
   });
 }
 
 
+const closeSuccessMessage =() => {
+  successMessageContainer.remove();
+};
 
 
-export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage}
+const closeErrorMessage =() => {
+  errorMessageContainer.remove();
+};
+
+document.addEventListener('keydown', (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeSuccessMessage();
+  }
+});
+
+document.addEventListener('click', () => {
+  closeSuccessMessage();
+});
+
+const onClickErrorButton = () => {
+  const errorButton = document.querySelector('.error__button');
+  errorButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    closeErrorMessage();
+  });
+};
+
+document.addEventListener('keydown', (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeErrorMessage();
+  }
+});
+
+document.addEventListener('click', () => {
+  closeErrorMessage();
+});
+
+export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton}
 
