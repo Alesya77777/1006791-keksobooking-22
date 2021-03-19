@@ -1,4 +1,3 @@
-import {showAlert} from './util.js';
 import {sendData} from './api.js';
 import {writeAddress} from './map.js';
 import {isEscEvent} from './util.js';
