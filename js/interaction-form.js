@@ -159,16 +159,14 @@ const showErrorMessage = () => {
   document.querySelector('.map').appendChild(errorMessageContainer)
 };
 
-const setUserFormSubmit = (onSuccess, onSuccessMessage, onErrorMessage) => {
+const setUserFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData(
       () => onSuccess(),
-      () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+      () => onFail(),
       new FormData(evt.target),
-      () => onSuccessMessage(),
-      () => onErrorMessage(),
     );
   });
 }
@@ -211,7 +209,10 @@ document.addEventListener('keydown', (evt) => {
 
 document.addEventListener('click', () => {
   closeErrorMessage();
+
 });
+
+
 
 export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton}
 

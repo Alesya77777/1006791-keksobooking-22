@@ -2,7 +2,7 @@
 //import {createAds} from './data.js';
 import {disableAllForm} from './interaction-form.js';
 import {createMap, createMarker} from './map.js';
-import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage} from './interaction-form.js';
+import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton} from './interaction-form.js';
 import {showAlert} from './util.js';
 //import {createCustomPopup} from './popup.js'
 
@@ -18,5 +18,11 @@ getData(
 );
 
 
-setUserFormSubmit(cleanPage,showSuccessMessage, showErrorMessage);
+setUserFormSubmit(() => {
+  cleanPage();
+  showSuccessMessage();
+}, () => {
+  showErrorMessage();
+  onClickErrorButton();
+});
 
