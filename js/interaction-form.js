@@ -2,6 +2,7 @@ import {sendData} from './api.js';
 import {writeAddress} from './map.js';
 import {isEscEvent} from './util.js';
 
+
 const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
 const allFieldsetsForm = document.querySelector('.ad-form').querySelectorAll('fieldset');
@@ -158,6 +159,53 @@ const showErrorMessage = () => {
   document.querySelector('.map').appendChild(errorMessageContainer)
 };
 
+const houseTypeSelect = document.querySelector('#housing-type');
+const housePriceSelect = document.querySelector('#housing-price');
+const houseRoomSelect = document.querySelector('#housing-rooms');
+const houseGuestSelect = document.querySelector('#housing-guests');
+const houseWifiSelect = document.querySelector('#filter-wifi');
+const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
+const houseParkingSelect = document.querySelector('#filter-parking');
+const houseWasheSelect = document.querySelector('#filter-washe');
+const houseElevatorSelect = document.querySelector('#filter-elevator');
+const houseConditionerSelect = document.querySelector('#filter-conditioner');
+
+const setHouseType = (cb) => {
+  houseTypeSelect.addEventListener('change', () => {
+    cb();
+  });
+};
+
+const setHousePrice = (cb) => {
+  housePriceSelect.addEventListener('change', () => {
+    cb();
+  });
+};
+
+const setHouseRoom = (cb) => {
+  houseRoomSelect.addEventListener('change', () => {
+    cb();
+  });
+};
+
+const setHouseGuest = (cb) => {
+  houseGuestSelect.addEventListener('change', () => {
+    cb();
+  });
+};
+
+const setHouseWifi = (cb) => {
+  houseWifiSelect.addEventListener('change', () => {
+    cb();
+  });
+};
+
+
+
+
+
+
+
 const setUserFormSubmit = (onSuccess, onFail) => {
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -213,5 +261,5 @@ document.addEventListener('click', () => {
 
 
 
-export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton}
+export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi}
 
