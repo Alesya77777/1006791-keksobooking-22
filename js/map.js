@@ -60,7 +60,7 @@ const createMap = () => {
     inputAddress.value = `${coordinatesAddress.lat.toFixed(floatingPoint)}, ${coordinatesAddress.lng.toFixed(floatingPoint)}`;
   });
 
-}
+};
 
 const Default = {
   HOUSE_TYPE: 'Любой тип жилья',
@@ -70,38 +70,62 @@ const Default = {
 };
 const SIMILAR_AD_COUNT = 10;
 
-const getAdRank = (ad) => {
+const getAdRank = (ads) => {
   const houseTypeSelect = document.querySelector('#housing-type');
   const housePriceSelect = document.querySelector('#housing-price');
   const houseRoomSelect = document.querySelector('#housing-rooms');
   const houseGuestSelect = document.querySelector('#housing-guests');
-  const houseWifiSelect = document.querySelector('#filter-wifi');
+  /* const houseWifiSelect = document.querySelector('#filter-wifi');
   const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
   const houseParkingSelect = document.querySelector('#filter-parking');
   const houseWasheSelect = document.querySelector('#filter-washe');
   const houseElevatorSelect = document.querySelector('#filter-elevator');
-  const houseConditionerSelect = document.querySelector('#filter-conditioner');
+  const houseConditionerSelect = document.querySelector('#filter-conditioner');*/
 
   // console.log(ad);
-
-
-  let rank = 0;
-  if(houseTypeSelect.value === 'any' || ad.offer.type === houseTypeSelect.value) {
-    rank += 1;
-    if(housePriceSelect.value === 'any' || ad.offer.price === housePriceSelect.value) {
-      rank += 1;
-      if(houseRoomSelect.value === 'any' || ad.offer.rooms === houseRoomSelect.value) {
-        rank += 1;
-        if(houseGuestSelect.value === 'any' || ad.offer.guests === houseGuestSelect.value){
-          rank += 1;
-        }
-      }
+  let adPrice;
+  let newAds = [];
+  ads.forEach((ad) => {
+    if (ad.offer.price >= 10000 && ad.offer.price <= 50000)
+    {  adPrice = 'middle';}
+    else if (ad.offer.price < 10000) {
+      adPrice = 'low';
+    } else {
+      adPrice = 'high';
     }
 
-  }
+
+    let rank = 0;
+    if(houseTypeSelect.value === 'any' || ad.offer.type === houseTypeSelect.value) {
+      rank += 4;
+      if(housePriceSelect.value === 'any' || adPrice === housePriceSelect.value) {
+        rank += 3;
+        if(houseRoomSelect.value === 'any' || ad.offer.rooms === parseInt(houseRoomSelect.value)) {
+          rank += 2;
+          if(houseGuestSelect.value === 'any' || ad.offer.guests === parseInt(houseGuestSelect.value)){
+            rank += 1;
+          }else {
+            rank = 0;
+          }
+        }else {
+          rank = 0;
+        }
+      } else {
+        rank = 0;
+      }
+
+    } else {
+      rank = 0;
+    }
+
+    if (rank == 10)
+      newAds.push(ad);
+
+  });
+
   /*
 
-    if (houseWifiSelect.checked=== true) {
+    if (houseWifiSelect.checked === true) {
       rank += 1;}
   if (houseDishwasherSelect.checked=== true) {
     rank += 1;}
@@ -114,25 +138,24 @@ const getAdRank = (ad) => {
   if (houseConditionerSelect.checked=== true) {
     rank += 1;}
 */
-  console.log(rank);
-
+  //console.log(rank);
+  return newAds;
 };
 
-const sortAds = (adA, adB) => {
+/*const sortAds = (adA, adB) => {
   const rankA = getAdRank(adA);
   const rankB = getAdRank(adB);
-  //console.log(rankB - rankA);
   return rankB - rankA;
-}
+}*/
 
+let markers = [];
 
-
-const createMarker = (ads) => {
+const createMarkers = (ads) => {
   enableFilter();
-  const points = (ads);
-  points
-    .slice()
-    .sort(sortAds)
+  const points = ads;
+  const listPoints = getAdRank(points);
+  //console.log(listPoints);
+  listPoints
     .slice(0, SIMILAR_AD_COUNT)
     .forEach((point) => {
       const { location } = point;
@@ -154,6 +177,9 @@ const createMarker = (ads) => {
         },
       );
 
+      markers.push(usualMarker);
+
+
       usualMarker.addTo(map).bindPopup(
         () => createCustomPopup(point),
         {
@@ -163,4 +189,16 @@ const createMarker = (ads) => {
     });
 };
 
-export {createMap, createMarker,writeAddress, getAdRank}
+const closeMarker = () => {
+  map.closePopup();
+};
+
+
+
+const clearMarkers = () => {
+  markers.forEach((marker) => {
+    marker.remove();
+  })
+};
+
+export {createMap, createMarkers,writeAddress, getAdRank, closeMarker, clearMarkers}

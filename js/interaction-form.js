@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {writeAddress} from './map.js';
+import {writeAddress, closeMarker, clearMarkers} from './map.js';
 import {isEscEvent} from './util.js';
 
 
@@ -172,24 +172,32 @@ const houseConditionerSelect = document.querySelector('#filter-conditioner');
 
 const setHouseType = (cb) => {
   houseTypeSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
     cb();
   });
 };
 
 const setHousePrice = (cb) => {
   housePriceSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
     cb();
   });
 };
 
 const setHouseRoom = (cb) => {
   houseRoomSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
     cb();
   });
 };
 
 const setHouseGuest = (cb) => {
   houseGuestSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
     cb();
   });
 };
