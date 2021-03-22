@@ -189,10 +189,6 @@ const createMarkers = (ads) => {
     });
 };
 
-const closeMarker = () => {
-  map.closePopup();
-};
-
 
 const clearMarkers = () => {
   markers.forEach((marker) => {
