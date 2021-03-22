@@ -2,6 +2,7 @@
 const createCustomPopup = (ad) => {
   const similarAdTemplate = document.querySelector('#card').content;
   const similarListFragment = document.createDocumentFragment();
+
   const adElement = similarAdTemplate.cloneNode(true);
 
   const houseType =  {
@@ -48,6 +49,7 @@ const createCustomPopup = (ad) => {
 
   similarListFragment.appendChild(adElement);
 
+  //similarListElement.innerHTML = '';
   return similarListFragment;
 };
 
