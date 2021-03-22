@@ -164,11 +164,11 @@ const housePriceSelect = document.querySelector('#housing-price');
 const houseRoomSelect = document.querySelector('#housing-rooms');
 const houseGuestSelect = document.querySelector('#housing-guests');
 const houseWifiSelect = document.querySelector('#filter-wifi');
-const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
-const houseParkingSelect = document.querySelector('#filter-parking');
-const houseWasheSelect = document.querySelector('#filter-washe');
-const houseElevatorSelect = document.querySelector('#filter-elevator');
-const houseConditionerSelect = document.querySelector('#filter-conditioner');
+//const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
+//const houseParkingSelect = document.querySelector('#filter-parking');
+//const houseWasheSelect = document.querySelector('#filter-washe');
+//const houseElevatorSelect = document.querySelector('#filter-elevator');
+//const houseConditionerSelect = document.querySelector('#filter-conditioner');
 
 const setHouseType = (cb) => {
   houseTypeSelect.addEventListener('change', () => {

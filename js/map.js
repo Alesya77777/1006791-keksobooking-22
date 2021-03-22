@@ -62,12 +62,6 @@ const createMap = () => {
 
 };
 
-const Default = {
-  HOUSE_TYPE: 'Любой тип жилья',
-  HOUSE_PRICE: 'Любая',
-  HOUSE_ROOM: 'Любое число комнат',
-  HOUSE_GUEST:'Любое число гостей',
-};
 const SIMILAR_AD_COUNT = 10;
 
 const getAdRank = (ads) => {
@@ -192,7 +186,6 @@ const createMarkers = (ads) => {
 const closeMarker = () => {
   map.closePopup();
 };
-
 
 
 const clearMarkers = () => {

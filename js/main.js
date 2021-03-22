@@ -2,7 +2,7 @@
 //import {createAds} from './data.js';
 import {disableAllForm} from './interaction-form.js';
 import {createMap, createMarkers} from './map.js';
-import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi} from './interaction-form.js';
+import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest} from './interaction-form.js';
 import {showAlert} from './util.js';
 //import {createCustomPopup} from './popup.js'
 
