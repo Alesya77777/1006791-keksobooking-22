@@ -2,6 +2,7 @@
 import {enableAllForm, enableFilter} from './interaction-form.js';
 import {createCustomPopup} from './popup.js';
 
+
 const inputAddress = document.querySelector('#address');
 
 const latutideCenterMap = 35.6895;
@@ -152,6 +153,7 @@ let markers = [];
 const createMarkers = (ads) => {
   enableFilter();
   const points = ads;
+  clearMarkers();
   const listPoints = getAdRank(points);
   listPoints
     .slice(0, SIMILAR_AD_COUNT)
@@ -198,4 +200,4 @@ const clearMarkers = () => {
   })
 };
 
-export {createMap, createMarkers,writeAddress, getAdRank, closeMarker, clearMarkers}
+export {createMap, createMarkers,writeAddress, getAdRank, clearMarkers}
