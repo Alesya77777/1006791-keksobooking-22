@@ -164,11 +164,11 @@ const housePriceSelect = document.querySelector('#housing-price');
 const houseRoomSelect = document.querySelector('#housing-rooms');
 const houseGuestSelect = document.querySelector('#housing-guests');
 const houseWifiSelect = document.querySelector('#filter-wifi');
-//const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
-//const houseParkingSelect = document.querySelector('#filter-parking');
-//const houseWasheSelect = document.querySelector('#filter-washe');
-//const houseElevatorSelect = document.querySelector('#filter-elevator');
-//const houseConditionerSelect = document.querySelector('#filter-conditioner');
+const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
+const houseParkingSelect = document.querySelector('#filter-parking');
+const houseWasherSelect = document.querySelector('#filter-washer');
+const houseElevatorSelect = document.querySelector('#filter-elevator');
+const houseConditionerSelect = document.querySelector('#filter-conditioner');
 
 const setHouseType = (cb) => {
   houseTypeSelect.addEventListener('change', () => {
@@ -204,10 +204,51 @@ const setHouseGuest = (cb) => {
 
 const setHouseWifi = (cb) => {
   houseWifiSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
     cb();
   });
 };
 
+const setHouseDishwasher = (cb) => {
+  houseDishwasherSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
+    cb();
+  });
+};
+
+const setHouseParking = (cb) => {
+  houseParkingSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
+    cb();
+  });
+};
+
+const setHouseWasher = (cb) => {
+  houseWasherSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
+    cb();
+  });
+};
+
+const setHouseElevator = (cb) => {
+  houseElevatorSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
+    cb();
+  });
+};
+
+const setHouseConditioner = (cb) => {
+  houseConditionerSelect.addEventListener('change', () => {
+    closeMarker();
+    clearMarkers();
+    cb();
+  });
+};
 
 
 
@@ -269,5 +310,7 @@ document.addEventListener('click', () => {
 
 
 
-export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi}
+export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage,
+  onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi, setHouseDishwasher, setHouseParking,
+  setHouseWasher, setHouseElevator, setHouseConditioner}
 

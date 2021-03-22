@@ -69,14 +69,14 @@ const getAdRank = (ads) => {
   const housePriceSelect = document.querySelector('#housing-price');
   const houseRoomSelect = document.querySelector('#housing-rooms');
   const houseGuestSelect = document.querySelector('#housing-guests');
-  /* const houseWifiSelect = document.querySelector('#filter-wifi');
+  const houseWifiSelect = document.querySelector('#filter-wifi');
   const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
   const houseParkingSelect = document.querySelector('#filter-parking');
-  const houseWasheSelect = document.querySelector('#filter-washe');
+  const houseWasherSelect = document.querySelector('#filter-washer');
   const houseElevatorSelect = document.querySelector('#filter-elevator');
-  const houseConditionerSelect = document.querySelector('#filter-conditioner');*/
+  const houseConditionerSelect = document.querySelector('#filter-conditioner');
 
-  // console.log(ad);
+
   let adPrice;
   let newAds = [];
   ads.forEach((ad) => {
@@ -112,35 +112,40 @@ const getAdRank = (ads) => {
       rank = 0;
     }
 
-    if (rank == 10)
-      newAds.push(ad);
 
+    if (houseWifiSelect.checked === true && houseWifiSelect.value === ad.offer.features.find(item => item === 'wifi')) {
+      rank += 1;} else if (houseWifiSelect.checked === false ){
+      rank += 1;
+    }
+    if (houseDishwasherSelect.checked === true && houseDishwasherSelect.value === ad.offer.features.find(item => item === 'dishwasher')) {
+      rank += 1;} else if (houseDishwasherSelect.checked === false ){
+      rank += 1;
+    }
+    if (houseParkingSelect.checked === true && houseParkingSelect.value === ad.offer.features.find(item => item === 'parking')) {
+      rank += 1;} else if (houseParkingSelect.checked === false ){
+      rank += 1;
+    }
+    if (houseWasherSelect.checked === true && houseWasherSelect.value === ad.offer.features.find(item => item === 'washer')) {
+      rank += 1;} else if (houseWasherSelect.checked === false ){
+      rank += 1;
+    }
+    if (houseElevatorSelect.checked === true && houseElevatorSelect.value === ad.offer.features.find(item => item === 'elevator')) {
+      rank += 1;} else if (houseElevatorSelect.checked === false ){
+      rank += 1;
+    }
+    if (houseConditionerSelect.checked === true && houseConditionerSelect.value === ad.offer.features.find(item => item === 'conditioner')) {
+      rank += 1;} else if (houseConditionerSelect.checked === false ){
+      rank += 1;
+    }
+
+    if (rank == 16)
+      newAds.push(ad);
   });
 
-  /*
 
-    if (houseWifiSelect.checked === true) {
-      rank += 1;}
-  if (houseDishwasherSelect.checked=== true) {
-    rank += 1;}
-  if (houseParkingSelect.checked=== true) {
-    rank += 1;}
-  if (houseWasheSelect.checked=== true) {
-    rank += 1;}
-  if (houseElevatorSelect.checked=== true) {
-    rank += 1;}
-  if (houseConditionerSelect.checked=== true) {
-    rank += 1;}
-*/
-  //console.log(rank);
   return newAds;
 };
 
-/*const sortAds = (adA, adB) => {
-  const rankA = getAdRank(adA);
-  const rankB = getAdRank(adB);
-  return rankB - rankA;
-}*/
 
 let markers = [];
 
@@ -148,7 +153,6 @@ const createMarkers = (ads) => {
   enableFilter();
   const points = ads;
   const listPoints = getAdRank(points);
-  //console.log(listPoints);
   listPoints
     .slice(0, SIMILAR_AD_COUNT)
     .forEach((point) => {

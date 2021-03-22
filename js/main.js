@@ -1,12 +1,14 @@
+/* global _:readonly */
 
-//import {createAds} from './data.js';
 import {disableAllForm} from './interaction-form.js';
 import {createMap, createMarkers} from './map.js';
-import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest} from './interaction-form.js';
+import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType,
+  setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi, setHouseDishwasher, setHouseParking,
+  setHouseWasher, setHouseElevator, setHouseConditioner} from './interaction-form.js';
 import {showAlert} from './util.js';
-//import {createCustomPopup} from './popup.js'
-
 import {getData} from './api.js';
+
+const RERENDER_DELAY = 500;
 
 disableAllForm();
 createMap();
@@ -14,11 +16,46 @@ createMap();
 
 getData( (ads) => {
   createMarkers(ads);
-  setHouseType(() => createMarkers(ads));
-  setHousePrice(() => createMarkers(ads));
-  setHouseRoom(() => createMarkers(ads));
-  setHouseGuest(() => createMarkers(ads));
-  //setHouseWifi(() => createMarker(ads));
+  setHouseType(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHousePrice(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseRoom(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseGuest(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseWifi(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseDishwasher(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseParking(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseWasher(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseElevator(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
+  setHouseConditioner(_.debounce(
+    () => createMarkers(ads),
+    RERENDER_DELAY,
+  ));
 },
 () => showAlert('Не удалось загрузить данные с сервера'),
 );
