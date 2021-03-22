@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {writeAddress, closeMarker, clearMarkers} from './map.js';
+import {writeAddress} from './map.js';
 import {isEscEvent} from './util.js';
 
 
@@ -164,53 +164,51 @@ const housePriceSelect = document.querySelector('#housing-price');
 const houseRoomSelect = document.querySelector('#housing-rooms');
 const houseGuestSelect = document.querySelector('#housing-guests');
 const houseWifiSelect = document.querySelector('#filter-wifi');
-//const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
-//const houseParkingSelect = document.querySelector('#filter-parking');
-//const houseWasheSelect = document.querySelector('#filter-washe');
-//const houseElevatorSelect = document.querySelector('#filter-elevator');
-//const houseConditionerSelect = document.querySelector('#filter-conditioner');
+const houseDishwasherSelect = document.querySelector('#filter-dishwasher');
+const houseParkingSelect = document.querySelector('#filter-parking');
+const houseWasherSelect = document.querySelector('#filter-washer');
+const houseElevatorSelect = document.querySelector('#filter-elevator');
+const houseConditionerSelect = document.querySelector('#filter-conditioner');
 
 const setHouseType = (cb) => {
-  houseTypeSelect.addEventListener('change', () => {
-    closeMarker();
-    clearMarkers();
-    cb();
-  });
+  houseTypeSelect.addEventListener('change', cb);
 };
 
 const setHousePrice = (cb) => {
-  housePriceSelect.addEventListener('change', () => {
-    closeMarker();
-    clearMarkers();
-    cb();
-  });
+  housePriceSelect.addEventListener('change', cb);
 };
 
 const setHouseRoom = (cb) => {
-  houseRoomSelect.addEventListener('change', () => {
-    closeMarker();
-    clearMarkers();
-    cb();
-  });
+  houseRoomSelect.addEventListener('change', cb);
 };
 
 const setHouseGuest = (cb) => {
-  houseGuestSelect.addEventListener('change', () => {
-    closeMarker();
-    clearMarkers();
-    cb();
-  });
+  houseGuestSelect.addEventListener('change', cb);
 };
 
 const setHouseWifi = (cb) => {
-  houseWifiSelect.addEventListener('change', () => {
-    cb();
-  });
+  houseWifiSelect.addEventListener('change', cb);
 };
 
+const setHouseDishwasher = (cb) => {
+  houseDishwasherSelect.addEventListener('change', cb);
+};
 
+const setHouseParking = (cb) => {
+  houseParkingSelect.addEventListener('change', cb);
+};
 
+const setHouseWasher = (cb) => {
+  houseWasherSelect.addEventListener('change', cb);
+};
 
+const setHouseElevator = (cb) => {
+  houseElevatorSelect.addEventListener('change', cb);
+};
+
+const setHouseConditioner = (cb) => {
+  houseConditionerSelect.addEventListener('change', cb);
+};
 
 
 
@@ -269,5 +267,7 @@ document.addEventListener('click', () => {
 
 
 
-export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi}
+export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage,
+  onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi, setHouseDishwasher, setHouseParking,
+  setHouseWasher, setHouseElevator, setHouseConditioner}
 
