@@ -138,8 +138,10 @@ const getAdRank = (ads) => {
       rank += 1;
     }
 
-    if (rank == 16)
+    if (rank === 16) {
       newAds.push(ad);
+    }
+
   });
 
 
