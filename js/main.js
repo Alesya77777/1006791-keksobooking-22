@@ -7,6 +7,7 @@ import {setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onCli
   setHouseWasher, setHouseElevator, setHouseConditioner} from './interaction-form.js';
 import {showAlert} from './util.js';
 import {getData} from './api.js';
+import './avatar.js';
 
 const RERENDER_DELAY = 500;
 
