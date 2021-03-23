@@ -2,16 +2,16 @@
 import {enableAllForm, enableFilter} from './interaction-form.js';
 import {createCustomPopup} from './popup.js';
 
-
-const inputAddress = document.querySelector('#address');
-
-const latutideCenterMap = 35.6895;
-const longitudeCenterMap = 139.692;
-const zoomMap = 12;
+const LATUTIDE_CENTER_MAP = 35.6895;
+const LONGITUDE_CENTER_MAP = 139.692;
+const ZOOM_MAP = 12;
 const LATUTIDE_MARKER= 35.6895;
 const LONGITUDE_MARKER= 139.692;
+const FLOATING_POINT = 5;
+const SIMILAR_AD_COUNT = 10;
 const map = L.map('map-canvas');
 
+const inputAddress = document.querySelector('#address');
 
 const writeAddress = () => {
   document.querySelector('#address').value = (`${LATUTIDE_MARKER}, ${LONGITUDE_MARKER}`);
@@ -22,9 +22,9 @@ const createMap = () => {
     enableAllForm();
     writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
   }).setView({
-    lat: latutideCenterMap,
-    lng: longitudeCenterMap,
-  }, zoomMap);
+    lat: LATUTIDE_CENTER_MAP,
+    lng: LONGITUDE_CENTER_MAP,
+  }, ZOOM_MAP);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -54,16 +54,15 @@ const createMap = () => {
 
   mainMarker.addTo(map);
 
-  const floatingPoint = 5;
+
   mainMarker.on('moveend', (evt) => {
     inputAddress.setAttribute('readonly', 'readonly');
     const coordinatesAddress = evt.target.getLatLng();
-    inputAddress.value = `${coordinatesAddress.lat.toFixed(floatingPoint)}, ${coordinatesAddress.lng.toFixed(floatingPoint)}`;
+    inputAddress.value = `${coordinatesAddress.lat.toFixed(FLOATING_POINT)}, ${coordinatesAddress.lng.toFixed(FLOATING_POINT)}`;
   });
 
 };
 
-const SIMILAR_AD_COUNT = 10;
 
 const getAdRank = (ads) => {
   const houseTypeSelect = document.querySelector('#housing-type');

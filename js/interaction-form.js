@@ -2,13 +2,13 @@ import {sendData} from './api.js';
 import {writeAddress} from './map.js';
 import {isEscEvent} from './util.js';
 
-
+const MOLD_CLEANING_DELAY_TIME =0;
 const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
 const allFieldsetsForm = document.querySelector('.ad-form').querySelectorAll('fieldset');
 const allSelectes = document.querySelectorAll('.map__filter');
 const allFieldsetsFilter = document.querySelector('.map__filters').querySelectorAll('fieldset');
-const MOLD_CLEANING_DELAY_TIME =0;
+
 
 
 const disableForm = (form) => {
