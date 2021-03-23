@@ -1,4 +1,3 @@
-
 const createCustomPopup = (ad) => {
   const similarAdTemplate = document.querySelector('#card').content;
   const similarListFragment = document.createDocumentFragment();
