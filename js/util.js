@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 const getRandomInteger = (rangeFrom, rangeTo) => {
   if (rangeFrom >=0 && rangeTo >=0) {
     if (rangeFrom < rangeTo) {
@@ -44,7 +46,6 @@ const getRandomArrayList = (list) => {
   return listIndexArray;
 };
 
-const ALERT_SHOW_TIME = 5000;
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
