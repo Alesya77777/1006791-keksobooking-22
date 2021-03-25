@@ -20,6 +20,7 @@ const writeAddress = () => {
 const createMap = () => {
   map.on('load', () => {
     enableAllForm();
+    inputAddress.setAttribute('readonly', 'readonly');
     writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
   }).setView({
     lat: LATUTIDE_CENTER_MAP,
@@ -56,7 +57,6 @@ const createMap = () => {
 
 
   mainMarker.on('moveend', (evt) => {
-    inputAddress.setAttribute('readonly', 'readonly');
     const coordinatesAddress = evt.target.getLatLng();
     inputAddress.value = `${coordinatesAddress.lat.toFixed(FLOATING_POINT)}, ${coordinatesAddress.lng.toFixed(FLOATING_POINT)}`;
   });

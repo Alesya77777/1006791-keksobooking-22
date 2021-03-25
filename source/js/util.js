@@ -1,6 +1,6 @@
 const ALERT_SHOW_TIME = 5000;
 
-const getRandomInteger = (rangeFrom, rangeTo) => {
+/*const getRandomInteger = (rangeFrom, rangeTo) => {
   if (rangeFrom >=0 && rangeTo >=0) {
     if (rangeFrom < rangeTo) {
       rangeFrom = Math.ceil(rangeFrom);
@@ -44,7 +44,7 @@ const getRandomArrayList = (list) => {
     listIndexArray[i] = list[i];
   }
   return listIndexArray;
-};
+};*/
 
 
 const showAlert = (message) => {
@@ -74,5 +74,5 @@ const isEscEvent = (evt) => {
 
 
 
-export {getRandomInteger, getRandomFloatNumber, getRandomArrayElement, getRandomArrayList, showAlert, isEscEvent};
+export {showAlert, isEscEvent};
 
