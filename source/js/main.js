@@ -3,13 +3,15 @@
 import {createMap, createMarkers,updateMarkers} from './map.js';
 import {disableAllForm, onClickResetButton, onSuccessMessageEscPress,onErrorMessageEscPress, setUserFormSubmit,cleanPage, showSuccessMessage, showErrorMessage, onClickErrorButton, setHouseType,
   setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi, setHouseDishwasher, setHouseParking,
-  setHouseWasher, setHouseElevator, setHouseConditioner} from './interaction-form.js';
+  setHouseWasher, setHouseElevator, setHouseConditioner, onClickSuccessMessage, onClickErrorMessage} from './interaction-form.js';
 import {showAlert} from './util.js';
 import {getData} from './api.js';
 import './avatar.js';
 
 const RERENDER_DELAY = 500;
 const errorButton = document.querySelector('#error').content.querySelector('.error__button');
+const successMessageTemplate = document.querySelector('#success').content;
+const errorMessageTemplate = document.querySelector('#error').content;
 
 disableAllForm();
 createMap(() => getData( (ads) => {
@@ -62,6 +64,7 @@ createMap(() => getData( (ads) => {
 
 setUserFormSubmit(() => {
   document.addEventListener('keydown', onSuccessMessageEscPress);
+  successMessageTemplate.addEventListener('click', onClickSuccessMessage );
   cleanPage();
   updateMarkers();
   showSuccessMessage();
@@ -69,6 +72,7 @@ setUserFormSubmit(() => {
 }, () => {
   document.addEventListener('keydown', onErrorMessageEscPress);
   errorButton.addEventListener('click', onClickErrorButton);
+  errorMessageTemplate.addEventListener('click', onClickErrorMessage)
   showErrorMessage();
 
 });

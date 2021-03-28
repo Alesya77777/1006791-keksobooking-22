@@ -242,6 +242,7 @@ const onErrorMessageEscPress = (evt) => {
 const closeSuccessMessage =() => {
   successMessageContainer.remove();
   document.removeEventListener('keydown', onSuccessMessageEscPress);
+  successMessageTemplate.removeEventListener('click', onClickSuccessMessage );
 };
 
 const errorButton = errorMessageTemplate.querySelector('.error__button');
@@ -255,11 +256,21 @@ const closeErrorMessage =() => {
   errorMessageContainer.remove();
   document.removeEventListener('keydown', onErrorMessageEscPress);
   errorButton.removeEventListener('click', onClickErrorButton);
+  errorMessageTemplate.removeEventListener('click', onClickErrorMessage );
 };
 
 
+const onClickSuccessMessage = () => closeSuccessMessage();
+
+const onClickErrorMessage = () => closeErrorMessage();
+
 document.addEventListener('click', () => {
   closeSuccessMessage();
+});
+
+
+document.addEventListener('click', () => {
+  closeErrorMessage();
 });
 
 
@@ -273,14 +284,11 @@ const onClickResetButton = () => {
 };
 
 
-document.addEventListener('click', () => {
-  closeErrorMessage();
-
-});
 
 
 
 export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage,
   onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi, setHouseDishwasher, setHouseParking,
-  setHouseWasher, setHouseElevator, setHouseConditioner, onClickResetButton, onSuccessMessageEscPress, onErrorMessageEscPress}
+  setHouseWasher, setHouseElevator, setHouseConditioner, onClickResetButton, onSuccessMessageEscPress, onErrorMessageEscPress,
+  onClickSuccessMessage, onClickErrorMessage}
 
