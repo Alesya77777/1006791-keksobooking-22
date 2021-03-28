@@ -17,9 +17,11 @@ const writeAddress = () => {
   document.querySelector('#address').value = (`${LATUTIDE_MARKER}, ${LONGITUDE_MARKER}`);
 };
 
-const createMap = () => {
+let mainPoint = {};
+const createMap = (cb) => {
   map.on('load', () => {
     enableAllForm();
+    cb();
     inputAddress.setAttribute('readonly', 'readonly');
     writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
   }).setView({
@@ -52,7 +54,7 @@ const createMap = () => {
       icon: mainPinIcon,
     },
   );
-
+  mainPoint = mainMarker;
   mainMarker.addTo(map);
 
 
@@ -150,10 +152,12 @@ const getAdRank = (ads) => {
 
 
 let markers = [];
-
+let usalMarkers = [];
+let  points = [];
 const createMarkers = (ads) => {
   enableFilter();
-  const points = ads;
+  //const
+  points = ads;
   clearMarkers();
   const listPoints = getAdRank(points);
   listPoints
@@ -177,7 +181,7 @@ const createMarkers = (ads) => {
           icon: usualPinIcon,
         },
       );
-
+      usalMarkers.push(usualMarker);
       markers.push(usualMarker);
 
 
@@ -197,4 +201,9 @@ const clearMarkers = () => {
   })
 };
 
-export {createMap, createMarkers,writeAddress, getAdRank, clearMarkers}
+const updateMarkers = () => {
+  createMarkers(points);
+  mainPoint.setLatLng([LATUTIDE_CENTER_MAP, LONGITUDE_CENTER_MAP]);
+}
+
+export {createMap, createMarkers,writeAddress, getAdRank, clearMarkers, updateMarkers}

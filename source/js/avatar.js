@@ -44,3 +44,9 @@ fileChooserHouse.addEventListener('change', () => {
   }
 });
 
+const clearnPicture = () => {
+  previewAvatar.src = './img/muffin-grey.svg';
+  previewHouse.src = ' ';
+}
+
+export {clearnPicture}

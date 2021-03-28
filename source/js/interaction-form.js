@@ -1,8 +1,8 @@
 import {sendData} from './api.js';
-import {writeAddress} from './map.js';
+import {writeAddress, updateMarkers} from './map.js';
 import {isEscEvent} from './util.js';
+import {clearnPicture} from './avatar';
 
-const MOLD_CLEANING_DELAY_TIME =0;
 const adForm = document.querySelector('.ad-form');
 const mapForm = document.querySelector('.map__filters');
 const allFieldsetsForm = document.querySelector('.ad-form').querySelectorAll('fieldset');
@@ -59,25 +59,25 @@ const selectTimeIn = document.querySelector('#timein');
 const selectTimeOut = document.querySelector('#timeout');
 
 
-const changePrice = () => {
+const onChangePrice = () => {
   priceLodging.placeholder = housePrice[selectTypeHouse.value];
   priceLodging.min = housePrice[selectTypeHouse.value];
 
 };
 
-const changeTimeIn = () => {
+const onChangeTimeIn = () => {
   selectTimeOut.value =selectTimeOut.children[selectTimeIn.selectedIndex].value;
 };
 
-const changeTimeOut = () => {
+const onChangeTimeOut = () => {
   selectTimeIn.value =selectTimeIn.children[selectTimeOut.selectedIndex].value;
 };
 
-document.addEventListener('DOMContentLoaded', changePrice);
+document.addEventListener('DOMContentLoaded', onChangePrice);
 
-selectTypeHouse.addEventListener('change',changePrice);
-selectTimeIn.addEventListener('change',changeTimeIn);
-selectTimeOut.addEventListener('change',changeTimeOut);
+selectTypeHouse.addEventListener('change',onChangePrice);
+selectTimeIn.addEventListener('change',onChangeTimeIn);
+selectTimeOut.addEventListener('change',onChangeTimeOut);
 
 
 const selectRoom = document.querySelector('#room_number');
@@ -96,7 +96,7 @@ const selectCapacityDefault = () => {
   selectCapacity.options[0].disabled = true;
 }
 
-const  selectEnabelCapacity= () => {
+const  onSelectEnabelCapacity= () => {
   selectCapacityDefault();
   selectFirstEnableElementList();
 };
@@ -106,9 +106,9 @@ const removeSelectElement = (list) => {
   list.forEach(element => element.selected = false);
 };
 
-document.addEventListener('DOMContentLoaded', selectEnabelCapacity);
+document.addEventListener('DOMContentLoaded', onSelectEnabelCapacity);
 
-const changeCapacity = () => {
+const onChangeCapacity = () => {
   enableElements(document.querySelector('#capacity').querySelectorAll('option'));
   removeSelectElement(document.querySelector('#capacity').querySelectorAll('option'));
   switch (selectRoom.value) {
@@ -130,30 +130,32 @@ const changeCapacity = () => {
   }
   selectFirstEnableElementList();
 };
-selectRoom.addEventListener('change',changeCapacity);
+selectRoom.addEventListener('change',onChangeCapacity);
 
 
 
 const cleanPage = () => {
-  setTimeout(() => {
-    mapForm.reset();
-    adForm.reset();
-    selectEnabelCapacity();
-    writeAddress();
-  }, MOLD_CLEANING_DELAY_TIME )
+  mapForm.reset();
+  adForm.reset();
+  clearnPicture();
+  onSelectEnabelCapacity();
+  writeAddress();
 }
+
+const successMessageTemplate = document.querySelector('#success').content;
+const errorMessageTemplate = document.querySelector('#error').content;
+
 
 const successMessageContainer = document.createElement('div');
 const showSuccessMessage = () => {
-  const successMessageTemplate = document.querySelector('#success').content;
   const successMessageElement = successMessageTemplate.cloneNode(true);
   successMessageContainer.append(successMessageElement);
-  document.querySelector('.map').appendChild(successMessageContainer)
+  document.querySelector('main').appendChild(successMessageContainer);
+
 };
 
 const errorMessageContainer = document.createElement('div');
 const showErrorMessage = () => {
-  const errorMessageTemplate = document.querySelector('#error').content;
   const errorMessageElement = errorMessageTemplate.cloneNode(true);
   errorMessageContainer.append(errorMessageElement);
   document.querySelector('.map').appendChild(errorMessageContainer)
@@ -224,41 +226,52 @@ const setUserFormSubmit = (onSuccess, onFail) => {
   });
 }
 
-
-const closeSuccessMessage =() => {
-  successMessageContainer.remove();
-};
-
-
-const closeErrorMessage =() => {
-  errorMessageContainer.remove();
-};
-
-document.addEventListener('keydown', (evt) => {
+const onSuccessMessageEscPress = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     closeSuccessMessage();
   }
-});
+}
+
+const onErrorMessageEscPress = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeErrorMessage();
+  }
+}
+const closeSuccessMessage =() => {
+  successMessageContainer.remove();
+  document.removeEventListener('keydown', onSuccessMessageEscPress);
+};
+
+const errorButton = errorMessageTemplate.querySelector('.error__button');
+
+const onClickErrorButton = (evt) => {
+  evt.preventDefault();
+  closeErrorMessage();
+};
+
+const closeErrorMessage =() => {
+  errorMessageContainer.remove();
+  document.removeEventListener('keydown', onErrorMessageEscPress);
+  errorButton.removeEventListener('click', onClickErrorButton);
+};
+
 
 document.addEventListener('click', () => {
   closeSuccessMessage();
 });
 
-const onClickErrorButton = () => {
-  const errorButton = document.querySelector('.error__button');
-  errorButton.addEventListener('click', (evt) => {
+
+const onClickResetButton = () => {
+  const resetButton = document.querySelector('.ad-form__reset');
+  resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    closeErrorMessage();
+    cleanPage();
+    updateMarkers();
   });
 };
 
-document.addEventListener('keydown', (evt) => {
-  if (isEscEvent(evt)) {
-    evt.preventDefault();
-    closeErrorMessage();
-  }
-});
 
 document.addEventListener('click', () => {
   closeErrorMessage();
@@ -269,5 +282,5 @@ document.addEventListener('click', () => {
 
 export{disableAllForm, enableAllForm, setUserFormSubmit, enableFilter, cleanPage, showSuccessMessage, showErrorMessage,
   onClickErrorButton, setHouseType, setHousePrice, setHouseRoom, setHouseGuest, setHouseWifi, setHouseDishwasher, setHouseParking,
-  setHouseWasher, setHouseElevator, setHouseConditioner}
+  setHouseWasher, setHouseElevator, setHouseConditioner, onClickResetButton, onSuccessMessageEscPress, onErrorMessageEscPress}
 
