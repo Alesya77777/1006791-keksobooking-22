@@ -22,7 +22,7 @@ const createMap = (cb) => {
   map.on('load', () => {
     enableAllForm();
     cb();
-    inputAddress.setAttribute('readonly', 'readonly');
+    inputAddress.readOnly = true;
     writeAddress(LATUTIDE_MARKER, LONGITUDE_MARKER);
   }).setView({
     lat: LATUTIDE_CENTER_MAP,
