@@ -239,10 +239,16 @@ const onErrorMessageEscPress = (evt) => {
     closeErrorMessage();
   }
 }
+
+
+const onClickSuccessMessage = () => closeSuccessMessage();
+const onClickErrorMessage = () => closeErrorMessage();
+
+
 const closeSuccessMessage =() => {
   successMessageContainer.remove();
   document.removeEventListener('keydown', onSuccessMessageEscPress);
-  successMessageTemplate.removeEventListener('click', onClickSuccessMessage );
+  document.removeEventListener('click', onClickSuccessMessage );
 };
 
 const errorButton = errorMessageTemplate.querySelector('.error__button');
@@ -256,22 +262,11 @@ const closeErrorMessage =() => {
   errorMessageContainer.remove();
   document.removeEventListener('keydown', onErrorMessageEscPress);
   errorButton.removeEventListener('click', onClickErrorButton);
-  errorMessageTemplate.removeEventListener('click', onClickErrorMessage );
+  document.removeEventListener('click', onClickErrorMessage );
 };
 
 
-const onClickSuccessMessage = () => closeSuccessMessage();
 
-const onClickErrorMessage = () => closeErrorMessage();
-
-document.addEventListener('click', () => {
-  closeSuccessMessage();
-});
-
-
-document.addEventListener('click', () => {
-  closeErrorMessage();
-});
 
 
 const onClickResetButton = () => {

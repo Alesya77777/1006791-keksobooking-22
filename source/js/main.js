@@ -10,8 +10,8 @@ import './avatar.js';
 
 const RERENDER_DELAY = 500;
 const errorButton = document.querySelector('#error').content.querySelector('.error__button');
-const successMessageTemplate = document.querySelector('#success').content;
-const errorMessageTemplate = document.querySelector('#error').content;
+
+
 
 disableAllForm();
 createMap(() => getData( (ads) => {
@@ -64,7 +64,7 @@ createMap(() => getData( (ads) => {
 
 setUserFormSubmit(() => {
   document.addEventListener('keydown', onSuccessMessageEscPress);
-  successMessageTemplate.addEventListener('click', onClickSuccessMessage );
+  document.addEventListener('click', onClickSuccessMessage );
   cleanPage();
   updateMarkers();
   showSuccessMessage();
@@ -72,7 +72,7 @@ setUserFormSubmit(() => {
 }, () => {
   document.addEventListener('keydown', onErrorMessageEscPress);
   errorButton.addEventListener('click', onClickErrorButton);
-  errorMessageTemplate.addEventListener('click', onClickErrorMessage)
+  document.addEventListener('click', onClickErrorMessage)
   showErrorMessage();
 
 });
