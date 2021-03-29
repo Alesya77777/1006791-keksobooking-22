@@ -140,6 +140,8 @@ const cleanPage = () => {
   clearnPicture();
   onSelectEnabelCapacity();
   writeAddress();
+  onChangePrice();
+
 }
 
 const successMessageTemplate = document.querySelector('#success').content;
@@ -264,9 +266,6 @@ const closeErrorMessage =() => {
   errorButton.removeEventListener('click', onClickErrorButton);
   document.removeEventListener('click', onClickErrorMessage );
 };
-
-
-
 
 
 const onClickResetButton = () => {
